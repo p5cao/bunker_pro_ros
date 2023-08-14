@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <!-- Run voxel grid filter -->
+  	<node pkg="my_pcl_tutorial" type="voxelGridFilter" name="voxelGridFilter" output="screen"/>
+			<param name="voxel/inputTopic" value="/ouster/points" type="string" />
+      <rosparam param="/voxel/leafSize">[0.2, 0.2, 0.2]</rosparam>
+
+  <!-- Run rviz -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find my_pcl_tutorial)/config/rviz_config.rviz" />
+
+</launch>
