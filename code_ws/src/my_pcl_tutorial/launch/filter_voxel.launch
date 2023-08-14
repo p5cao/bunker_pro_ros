@@ -3,11 +3,13 @@
 <launch>
 
   <!-- Run voxel grid filter -->
-  	<node pkg="my_pcl_tutorial" type="voxelGridFilter" name="voxelGridFilter" output="screen"/>
+  <node pkg="my_pcl_tutorial" type="voxelGridFilter" name="voxelGridFilter" output="screen"/>
 			<param name="voxel/inputTopic" value="/ouster/points" type="string" />
       <rosparam param="/voxel/leafSize">[0.2, 0.2, 0.2]</rosparam>
 
   <!-- Run rviz -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find my_pcl_tutorial)/config/rviz_config.rviz" />
-
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find my_pcl_tutorial)/config/rviz_config.rviz" />
+  
+  <!-- add tranform between map and os_sensor-->
+  <node pkg="tf" type ="static_transform_publisher" name="map_to_os_sensor_tf" args="0 0 0 0 0 0 map os_sensor 10" />
 </launch>
