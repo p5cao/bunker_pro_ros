@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <param name="/use_sim_time" value="true"/>
+  <!-- Run voxel grid filter -->
+  	<node pkg="my_pcl_tutorial" type="radiusFilter" name="radiusFilter" output="screen"/>
+	<param name="radius/inputTopic" value="/ouster/points" type="string" />
+        <param name="/radius/radius_search" value="0.5" type="double" />
+        <param name="/radius/minNeighbours" value="3" type="int" />
+
+  <!-- Run rviz -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find my_pcl_tutorial)/config/rviz_config.rviz" />
+    
+  <!-- add tranform between map and os_sensor-->
+  <node pkg="tf" type ="static_transform_publisher" name="map_to_os_sensor_tf" args="0 0 0 0 0 0 map os_sensor 10" />
+
+</launch>
